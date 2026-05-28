@@ -7,151 +7,117 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f9fa; color: #1a1a1a; font-size: 15px; line-height: 1.6; }
-
   .banner { background: #1a3a5c; color: white; padding: 1.5rem 2rem; }
   .banner h1 { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
   .banner p { font-size: 13px; opacity: 0.75; }
-
   .nav { background: white; border-bottom: 1px solid #e5e7eb; display: flex; overflow-x: auto; }
   .nav-btn { padding: 12px 18px; font-size: 13px; font-weight: 500; color: #6b7280; border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
   .nav-btn.active { color: #1a3a5c; border-bottom-color: #1a3a5c; }
   .nav-btn:hover { color: #1a3a5c; background: #f8f9fa; }
-
   .content { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
   .section { display: none; }
   .section.active { display: block; }
-
   .card { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
   .sec-label { font-size: 11px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .6rem; }
-
   .ctrl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
   .ctrl label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .04em; display: block; margin-bottom: 4px; }
   .ctrl select { width: 100%; padding: 9px 12px; border: 1px solid #d1d5db; border-radius: 8px; background: white; color: #1a1a1a; font-size: 14px; cursor: pointer; }
   .ctrl select:focus { outline: 2px solid #1a3a5c; outline-offset: 1px; }
-
   .stage-header { background: #1a3a5c; color: white; padding: .9rem 1.25rem; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: space-between; }
   .stage-header.nuisance { background: #6b7280; }
+  .stage-header.escalation { background: #059669; }
+  .stage-header.resolved { background: #059669; }
   .stage-header h3 { font-size: 15px; font-weight: 600; }
   .owner-tag { font-size: 11px; background: rgba(255,255,255,.2); padding: 3px 10px; border-radius: 20px; }
   .stage-body { background: white; border: 1px solid #e5e7eb; border-radius: 0 0 8px 8px; padding: 1.1rem; margin-bottom: 1rem; }
-
   .goal { background: #f0f4f8; border-radius: 6px; padding: .6rem 1rem; margin-bottom: 1rem; font-size: 13px; color: #374151; }
   .goal strong { color: #1a3a5c; }
-
   .step-box { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
   .step-head { background: #f8f9fa; padding: .65rem 1rem; font-size: 13px; font-weight: 600; color: #374151; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .timing-badge { font-size: 11px; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
   .step-body { padding: 1rem; }
-
   .todo-note { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px; padding: .65rem 1rem; margin-bottom: 1rem; font-size: 12px; color: #92400e; line-height: 1.5; }
-
   .caller-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 1rem; }
   .caller-tab { font-size: 12px; padding: 5px 12px; border: 1px solid #d1d5db; border-radius: 20px; background: transparent; color: #6b7280; cursor: pointer; transition: all .15s; }
   .caller-tab.active { background: #1a3a5c; color: white; border-color: #1a3a5c; }
   .caller-tab:hover:not(.active) { background: #f0f4f8; color: #1a3a5c; }
-
   .sub-section { margin-bottom: 1rem; }
   .sub-title { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .5rem; }
-
   .checks { display: flex; flex-direction: column; gap: 7px; }
   .chk { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #374151; }
   .chk-dot { width: 18px; height: 18px; border-radius: 50%; background: #d1fae5; border: 1.5px solid #059669; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: 10px; color: #059669; font-weight: 700; }
-
   .pill { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 4px; padding: 1px 6px; color: #6b7280; display: inline-block; margin-top: 2px; }
-
   .divider { border: none; border-top: 1px solid #f3f4f6; margin: .85rem 0; }
-
   .resolution-box { background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: .75rem 1rem; }
   .res-label { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: .4rem; }
+  .res-group-label { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; margin: .6rem 0 .3rem; }
   .res-option { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #374151; padding: 2px 0; }
   .res-dot { width: 8px; height: 8px; border-radius: 50%; background: #1a3a5c; flex-shrink: 0; }
-
+  .res-dot.green { background: #059669; }
   .routing { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: .85rem 1rem; margin-top: .85rem; }
   .r-title { font-size: 11px; font-weight: 700; color: #92400e; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .5rem; }
-  .r-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #374151; margin-bottom: 4px; }
+  .r-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #374151; margin-bottom: 4px; flex-wrap: wrap; }
   .r-if { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: #92400e; }
   .r-then { color: #1a3a5c; font-weight: 600; }
-
   .note-blue { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: .6rem 1rem; margin-top: .85rem; font-size: 12px; color: #1e40af; line-height: 1.5; }
   .note-yellow { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px; padding: .6rem 1rem; margin-top: .85rem; font-size: 12px; color: #92400e; line-height: 1.5; }
-
   .flow-stages { display: flex; flex-direction: column; gap: 8px; }
   .flow-stage-row { background: #f0f4f8; border-left: 4px solid #1a3a5c; border-radius: 4px; padding: .65rem 1rem; font-size: 13px; font-weight: 600; color: #1a3a5c; }
   .flow-stage-row.gray { border-left-color: #9ca3af; color: #6b7280; font-weight: 400; font-size: 12px; padding-left: 1.5rem; }
-
   .outcome-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-top: .85rem; }
   .outcome { border-radius: 8px; padding: .65rem 1rem; font-size: 13px; font-weight: 600; }
   .outcome.green { background: #d1fae5; border: 1px solid #059669; color: #065f46; }
-  .outcome.red { background: #fee2e2; border: 1px solid #dc2626; color: #7f1d1d; }
   .outcome.gray { background: #f3f4f6; border: 1px solid #9ca3af; color: #4b5563; }
-  .outcome-desc { font-size: 12px; color: #6b7280; margin-top: .75rem; line-height: 1.7; }
-
   .field-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .field-table th { text-align: left; padding: 8px 12px; background: #f3f4f6; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #6b7280; border-bottom: 1px solid #e5e7eb; }
   .field-table td { padding: 8px 12px; border-bottom: 1px solid #f9fafb; vertical-align: top; }
-
   .caller-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-top: .75rem; }
   .caller-card { background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 8px; padding: .75rem; }
   .caller-type { font-size: 12px; font-weight: 600; color: #1a3a5c; margin-bottom: 5px; }
-
   .help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
-  .help-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; display: flex; align-items: center; gap: 10px; font-size: 13px; color: #6b7280; }
+  .help-card { background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; display: flex; align-items: center; gap: 10px; font-size: 13px; color: #6b7280; text-decoration: none; }
+  .help-card:hover { background: #f0f4f8; border-color: #1a3a5c; color: #1a3a5c; }
   .help-icon { font-size: 20px; flex-shrink: 0; }
-
-  @media (max-width: 600px) {
-    .ctrl-row { grid-template-columns: 1fr; }
-    .help-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 600px) { .ctrl-row { grid-template-columns: 1fr; } .help-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-
 <div class="banner">
   <h1>Inbound Call Support</h1>
   <p>Process training guide &nbsp;·&nbsp; LeadSimple &nbsp;·&nbsp; v2 — Approved</p>
 </div>
-
 <div class="nav">
   <button class="nav-btn active" onclick="showSection('start', this)">Start Here</button>
   <button class="nav-btn" onclick="showSection('flow', this)">Process Flow</button>
   <button class="nav-btn" onclick="showSection('stages', this)">Stage Instructions</button>
-  <button class="nav-btn" onclick="showSection('nuisance', this)">Nuisance Calls</button>
   <button class="nav-btn" onclick="showSection('fields', this)">Field Reference</button>
-  <button class="nav-btn" onclick="showSection('help', this)">Need Help?</button>
 </div>
-
 <div class="content">
 
-  <!-- START HERE -->
   <div id="sec-start" class="section active">
     <div class="card">
       <div class="sec-label">How this process flows</div>
       <div class="flow-stages">
         <div class="flow-stage-row">1. New Inbound Call — identify caller type → collect info → select resolution</div>
-        <div class="flow-stage-row gray">↓ if Transferred Call selected</div>
+        <div class="flow-stage-row gray">↓ if Transferred Call / Took A Message / Routed To Voicemail / Needs Additional Follow Up</div>
         <div class="flow-stage-row">2. Transferred Ticket — assign → document → AppFolio → check resolution</div>
       </div>
       <div class="outcome-grid">
         <div class="outcome green">✓ Support Ticket Resolved</div>
-        <div class="outcome red">⚡ Escalation Initiated</div>
+        <div class="outcome green">⚡ Escalation Initiated</div>
         <div class="outcome gray">✕ Nuisance</div>
       </div>
     </div>
     <div class="help-grid">
-      <div class="help-card"><div class="help-icon">📋</div><span>Stage Instructions — exact steps per stage</span></div>
-      <div class="help-card"><div class="help-icon">🚫</div><span>Nuisance Calls — how to handle and document</span></div>
-<a class="help-card" href="https://docs.google.com/spreadsheets/d/10_rvR65nmZlfXa_APCyO1JaCuaKGlnQBXjiMLvo1dwc/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer">
-
-  <div class="help-icon">📋</div>
-
-  <span>Stage Instructions — exact steps per stage</span>
-
-</a>
-      <div class="help-card"><div class="help-icon">🔗</div><span>Open in LeadSimple — go directly to the process</span></div>
+      <a class="help-card" href="https://docs.google.com/spreadsheets/d/10_rvR65nmZlfXa_APCyO1JaCuaKGlnQBXjiMLvo1dwc/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer">
+        <div class="help-icon">⚡</div><span>Escalation Matrix — when and who to escalate</span>
+      </a>
+      <a class="help-card" href="https://app.leadsimple.com/v2/process-types/WMd2_kUaNDSZp6_Gq5OjPzu2LaeTx0yNqzKx36zT5DiIlFVJ2wGU?savedViewID=%22W9Rv-EQ_LgWX-P7dqZasNyb9fvmRxfK2f5r8L8EMXVV8RlGiSbA%3D%22" target="_blank" rel="noopener noreferrer">
+        <div class="help-icon">🔗</div><span>Open in LeadSimple — go directly to the process</span>
+      </a>
     </div>
   </div>
 
-  <!-- PROCESS FLOW -->
   <div id="sec-flow" class="section">
     <div class="card">
       <div class="sec-label">Active stages</div>
@@ -161,30 +127,24 @@
       </div>
       <div class="sec-label">Routing — end of New Inbound Call</div>
       <div class="routing" style="margin-bottom: 1rem;">
-        <div class="r-row"><span class="r-if">Transferred Call</span><span>→</span><span class="r-then">Transferred Ticket</span></div>
-        <div class="r-row"><span class="r-if">Resolving Ticket</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
-        <div class="r-row"><span class="r-if">No Action Needed</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
+        <div class="r-row"><span class="r-if">Transferred Call / Took A Message / Routed To Voicemail / Needs Additional Follow Up</span><span>→</span><span class="r-then">Transferred Ticket</span></div>
+        <div class="r-row"><span class="r-if">No Further Action Needed / Directed To Website / Educated Caller / Referred To RR</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
       </div>
       <div class="sec-label">Routing — end of Transferred Ticket</div>
       <div class="routing" style="margin-bottom: 1rem;">
-        <div class="r-row"><span class="r-if">Escalation Required</span><span>→</span><span class="r-then">Escalation Initiated</span></div>
-        <div class="r-row"><span class="r-if">Issue Resolved</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
+        <div class="r-row"><span class="r-if">Escalation Process Required = Yes</span><span>→</span><span class="r-then">Escalation Initiated</span></div>
+        <div class="r-row"><span class="r-if">Ticket Status = Resolved</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
+        <div class="r-row"><span class="r-if">Escalation Process Required = No</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
       </div>
       <div class="sec-label">How a process ends</div>
       <div class="outcome-grid">
         <div class="outcome green">✓ Support Ticket Resolved</div>
-        <div class="outcome red">⚡ Escalation Initiated</div>
+        <div class="outcome green">⚡ Escalation Initiated</div>
         <div class="outcome gray">✕ Nuisance</div>
-      </div>
-      <div class="outcome-desc">
-        <strong>Support Ticket Resolved</strong> — Call handled and fully documented. No further action needed.<br>
-        <strong>Escalation Initiated</strong> — Issue required escalation per the Escalation Matrix.<br>
-        <strong>Nuisance</strong> — Sales call, dropped call, or wrong number. Documented and canceled.
       </div>
     </div>
   </div>
 
-  <!-- STAGE INSTRUCTIONS -->
   <div id="sec-stages" class="section">
     <div class="ctrl-row">
       <div class="ctrl">
@@ -192,6 +152,9 @@
         <select id="stageSelect" onchange="updateStage()">
           <option value="1">New Inbound Call</option>
           <option value="2">Transferred Ticket</option>
+          <option value="3">Escalation Initiated</option>
+          <option value="4">Support Ticket Resolved</option>
+          <option value="5">Nuisance (Canceled Stage)</option>
         </select>
       </div>
       <div class="ctrl">
@@ -202,39 +165,6 @@
     <div id="stageCard"></div>
   </div>
 
-  <!-- NUISANCE CALLS -->
-  <div id="sec-nuisance" class="section">
-    <div class="stage-header nuisance">
-      <h3>Nuisance Calls — Handle Nuisance</h3>
-      <span class="owner-tag">Canceled Stage</span>
-    </div>
-    <div class="stage-body">
-      <div class="goal"><strong>Objective:</strong> Handle nuisance or repeated non-actionable calls professionally while maintaining records for reference.</div>
-      <div class="step-box" style="margin-bottom: .85rem;">
-        <div class="step-head">What counts as a nuisance call?</div>
-        <div class="step-body">
-          <div class="checks">
-            <div class="chk"><div class="chk-dot">✓</div><div>Sales calls — unsolicited vendor or service outreach</div></div>
-            <div class="chk"><div class="chk-dot">✓</div><div>Dropped calls — call connected but no one responded</div></div>
-            <div class="chk"><div class="chk-dot">✓</div><div>Wrong numbers — caller intended to reach a different business</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="step-box">
-        <div class="step-head">What to do</div>
-        <div class="step-body">
-          <div class="checks">
-            <div class="chk"><div class="chk-dot">✓</div><div>Document the call details in a LeadSimple process note<br><span class="pill">{{process.on_call_notes}}</span></div></div>
-            <div class="chk"><div class="chk-dot">✓</div><div>If the caller exists in the system, note any recurring patterns or behavior in AppFolio</div></div>
-            <div class="chk"><div class="chk-dot">✓</div><div>Move the process to the <strong>Nuisance</strong> canceled stage</div></div>
-          </div>
-          <div class="note-yellow" style="margin-top: .85rem;">⚠️ Even nuisance calls must be documented. If a pattern develops with the same number or caller, that history in AppFolio becomes important.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FIELD REFERENCE -->
   <div id="sec-fields" class="section">
     <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 1rem;">
       <div style="padding: .75rem 1.25rem; background: #f3f4f6; border-bottom: 1px solid #e5e7eb; font-size: 13px; font-weight: 600;">Process fields</div>
@@ -276,20 +206,7 @@
     </div>
   </div>
 
-  <!-- NEED HELP -->
-  <div id="sec-help" class="section">
-    <div class="help-grid">
-      <div class="help-card"><div class="help-icon">⚠️</div><span>Common issues & fixes</span></div>
-      <div class="help-card"><div class="help-icon">⚡</div><span>Escalation path</span></div>
-      <div class="help-card"><div class="help-icon">📄</div><span>Related SOPs</span></div>
-      <div class="help-card"><div class="help-icon">🔗</div><span>Open in LeadSimple</span></div>
-      <div class="help-card"><div class="help-icon">📊</div><span>AppFolio notes guide</span></div>
-      <div class="help-card"><div class="help-icon">📅</div><span>Follow-up task rules</span></div>
-    </div>
-  </div>
-
 </div>
-
 <script>
 const callerTypes = [
   { label: 'Owner', fields: ['{{owners.full_name}}', '{{owners.phone}}', '{{owners.email}}'] },
@@ -299,17 +216,17 @@ const callerTypes = [
   { label: 'Vendor', fields: ['{{vendor.full_name}}', '{{vendor.phone}}', '{{vendor.email}}'] },
   { label: 'Unknown Caller', fields: ['{{unknown_caller.full_name}}', '{{unknown_caller.phone}}', '{{unknown_caller.email}}'] },
 ];
-
 let activeCaller = 0;
-
+const DAY2_ROUTING = `<div class="routing" style="margin-top:.85rem;"><div class="r-title">Routing from this step</div><div class="r-row"><span class="r-if">Ticket Status = Resolved</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div><div class="r-row"><span class="r-if">Ticket Status = Needs Further</span><span>→</span><span class="r-then">Has the issue/request been resolved now? (Day 3)</span></div></div>`;
+const DAY3_ROUTING = `<div class="routing" style="margin-top:.85rem;"><div class="r-title">Routing from this step</div><div class="r-row"><span class="r-if">Escalation Process Required = Yes</span><span>→</span><span class="r-then">Escalation Initiated</span></div><div class="r-row"><span class="r-if">Ticket Status = Resolved</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div><div class="r-row"><span class="r-if">Escalation Process Required = No</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div></div>`;
 const stage2Tasks = [
-  { t: 'Please assign the ticket to the right person', timing: 'Immediately · Day 1', d: 'Assign the ticket in LeadSimple to the team member best suited to handle this request.', fields: [{ l: 'Assigned team member', f: '{{assignee_role.call_routed_to.first_name}}' }], note: null, noteType: null, routing: false },
-  { t: 'If this is an owner request — communicate via phone', timing: '2 hours later · Day 1', d: 'If the caller is an owner, all follow-up communication defaults to phone unless they have indicated otherwise.', fields: [{ l: 'Caller type reference', f: '{{process.caller_type}}' }], note: '⚠️ Owner calls are phone-first by default. Do not email unless explicitly requested by the owner.', noteType: 'yellow', routing: false },
-  { t: 'Take notes of what needs to happen to resolve the issue', timing: '2 hours later · Day 1', d: 'Add clear notes outlining exactly what steps are needed to resolve this ticket. Be specific enough that another team member could pick it up without asking questions.', fields: [{ l: 'Resolution notes', f: '{{process.on_call_notes}}' }], note: 'Write as if handing off to someone who knows nothing about the call.', noteType: 'blue', routing: false },
-  { t: 'Add any notes in AppFolio based on the conversation', timing: '2 hours later · Day 1', d: 'Document all relevant conversation details in the AppFolio record tied to the tenant, owner, applicant, vendor, or property.', fields: [{ l: 'Property reference', f: '{{property.street}}' }], note: 'AppFolio is the permanent record. LeadSimple tracks the workflow. Both must be updated.', noteType: 'blue', routing: false },
-  { t: 'If call requires follow-up, create a task for the team member', timing: 'Immediately · Day 1', d: 'If this ticket needs further action, create a task with the correct due date and all necessary context.', fields: [{ l: 'Urgent — due date: today', f: null }, { l: 'Non-urgent — due date: 48 hours', f: null }, { l: 'Include full context in the task description', f: null }], note: 'When in doubt, treat it as urgent. A task with a slightly off date is better than no task.', noteType: 'blue', routing: false },
-  { t: 'Has the issue/request been resolved?', timing: '1 day later · Day 2', d: 'Check in on the ticket status. If resolved, move to Support Ticket Resolved. If not, determine whether escalation is needed.', fields: [{ l: 'Ticket status', f: '{{process.ticket_status}}' }, { l: 'Escalation required?', f: '{{process.escalation_process_required}}' }], note: 'Use the Escalation Matrix if unsure whether to escalate.', noteType: 'blue', routing: true },
-  { t: 'Has the issue/request been resolved now?', timing: '1 day later · Day 3', d: 'Final check-in before closing or escalating. Make a determination and route accordingly.', fields: [{ l: 'Ticket status', f: '{{process.ticket_status}}' }, { l: 'Escalation required?', f: '{{process.escalation_process_required}}' }], note: 'Use the Escalation Matrix to guide this decision.', noteType: 'blue', routing: true },
+  { t: 'Please assign the ticket to the right person', timing: 'Immediately · Day 1', d: 'On the right-hand side of the process, select the appropriate person under Call Routed To so they can take over the process.', fields: [{ l: 'Assign', f: '{{assignee_role.call_routed_to.first_name}}' }], note: null, noteType: null, routingHtml: '' },
+  { t: 'If this is an owner request — communicate via phone', timing: '2 hours later · Day 1', d: '', fields: [{ l: 'Caller Type', f: '{{process.caller_type}}' }], note: null, noteType: null, routingHtml: '' },
+  { t: 'Take notes of what needs to take place in order to resolve the issue/ticket', timing: '2 hours later · Day 1', d: 'Add clear notes outlining exactly what steps are needed to resolve this ticket. Be specific enough that another team member could pick it up without asking questions.', fields: [ { l: 'Caller Type', f: '{{process.caller_type}}' }], note: null, noteType: null, routingHtml: '' },
+  { t: 'Add any notes in AppFolio based on the conversation', timing: '2 hours later · Day 1', d: 'Document all relevant conversation details in the AppFolio record tied to the tenant, owner, applicant, vendor, or property.', fields: [ { l: 'Caller Type', f: '{{process.caller_type}}' }], note: 'AppFolio is the permanent record. LeadSimple tracks the workflow. Both must be updated.', noteType: 'blue', routingHtml: '' },
+  { t: 'If call requires follow-up, create a task for the team member', timing: 'Immediately · Day 1', d: 'If urgent, set the due date for today. If non-urgent, set the due date for 48 hours out. Please include all relevant details and needed information within the task notes.', fields: [{ l: 'Caller Type', f: '{{process.caller_type}}' }], note: null, noteType: null, routingHtml: '' },
+  { t: 'Has the issue/request been resolved?', timing: '1 day later · Day 2', d: '', fields: [{ l: 'Has the Issue/Request Been Resolved?', f: '{{process.ticket_status}}' }], note: null, noteType: null, routingHtml: DAY2_ROUTING },
+  { t: 'Has the issue/request been resolved now?', timing: '1 day later · Day 3', d: 'If the issue is not resolved, confirm whether the Escalation process should be triggered.', fields: [{ l: 'Has the Issue/Request Been Resolved?', f: '{{process.ticket_status}}' }, { l: 'Escalation Required?', f: '{{process.escalation_process_required}}' }, { l: 'Caller Type', f: '{{process.caller_type}}' }], note: 'Use the <a href="https://docs.google.com/spreadsheets/d/10_rvR65nmZlfXa_APCyO1JaCuaKGlnQBXjiMLvo1dwc/edit?usp=sharing" target="_blank" style="color:#1e40af;font-weight:600;">Escalation Matrix</a> to help make this decision.', noteType: 'blue', routingHtml: DAY3_ROUTING },
 ];
 
 function showSection(id, btn) {
@@ -318,130 +235,50 @@ function showSection(id, btn) {
   document.getElementById('sec-' + id).classList.add('active');
   btn.classList.add('active');
 }
-
 function updateStage() {
   const sid = document.getElementById('stageSelect').value;
   const t = document.getElementById('taskSelect');
   if (sid === '1') {
     t.innerHTML = '<option value="0">Type of Caller?</option><option value="1">Collect Information</option>';
-  } else {
+  } else if (sid === '2') {
     t.innerHTML = stage2Tasks.map((tk, i) => `<option value="${i}">${tk.t}</option>`).join('');
+  } else if (sid === '3') {
+    t.innerHTML = '<option value="0">Trigger the start process: Escalation</option>';
+  } else if (sid === '4') {
+    t.innerHTML = '<option value="0">No tasks — process complete</option>';
+  } else {
+    t.innerHTML = '<option value="0">Handle Nuisance</option>';
   }
   activeCaller = 0;
   renderTask();
 }
-
-function setCallerTab(i) {
-  activeCaller = i;
-  renderTask();
-}
-
+function setCallerTab(i) { activeCaller = i; renderTask(); }
 function renderTask() {
   const sid = document.getElementById('stageSelect').value;
   const tid = parseInt(document.getElementById('taskSelect').value) || 0;
-
+  const card = document.getElementById('stageCard');
   if (sid === '1') {
     if (tid === 0) {
-      document.getElementById('stageCard').innerHTML = `
-        <div class="stage-header"><h3>New Inbound Call</h3><span class="owner-tag">Call Handler</span></div>
-        <div class="stage-body">
-          <div class="goal"><strong>Goal:</strong> Identify the caller type to determine which information collection fields apply.</div>
-          <div class="step-box">
-            <div class="step-head">Type of Caller? <span class="timing-badge">Immediately · Day 1</span></div>
-            <div class="step-body">
-              <div class="sub-section">
-                <div class="sub-title">Caller Type Field</div>
-                <div class="checks">
-                  <div class="chk"><div class="chk-dot">✓</div><div>Select caller type in LeadSimple<br><span class="pill">{{process.caller_type}}</span></div></div>
-                </div>
-              </div>
-              <div class="routing">
-                <div class="r-title">After selecting — go to the Collect Information task</div>
-                <div class="r-row"><span class="r-if">Owner / Tenant / Applicant / Prospective Owner / Vendor</span><span>→</span><span class="r-then">Collect Information</span></div>
-                <div class="r-row"><span class="r-if">Sales call / Dropped call / Wrong number</span><span>→</span><span class="r-then">Nuisance stage</span></div>
-              </div>
-            </div>
-          </div>
-        </div>`;
+      card.innerHTML = `<div class="stage-header"><h3>New Inbound Call</h3><span class="owner-tag">Call Handler</span></div><div class="stage-body"><div class="goal"><strong>Goal:</strong> Identify the caller type to determine which information collection fields apply.</div><div class="step-box"><div class="step-head">Type of Caller? <span class="timing-badge">Immediately · Day 1</span></div><div class="step-body"><div class="checks"><div class="chk"><div class="chk-dot">✓</div><div>Caller Type<br><span class="pill">{{process.caller_type}}</span></div></div></div><div class="routing"><div class="r-title">After selecting — go to the Collect Information task</div><div class="r-row"><span class="r-if">Owner / Tenant / Applicant / Prospective Owner / Vendor / Unknown Caller</span><span>→</span><span class="r-then">Collect Information</span></div><div class="r-row"><span class="r-if">Sales call / Dropped call / Wrong number</span><span>→</span><span class="r-then">Nuisance stage</span></div></div></div></div></div>`;
     } else {
       const ct = callerTypes[activeCaller];
       const tabs = callerTypes.map((c, i) => `<button class="caller-tab${i === activeCaller ? ' active' : ''}" onclick="setCallerTab(${i})">${c.label}</button>`).join('');
-      document.getElementById('stageCard').innerHTML = `
-        <div class="stage-header"><h3>New Inbound Call</h3><span class="owner-tag">Call Handler</span></div>
-        <div class="stage-body">
-          <div class="goal"><strong>Goal:</strong> Complete all fields below. All caller types collect the same information — only the field codes differ. Select your caller type above to see the correct fields.</div>
-          <div class="step-box">
-            <div class="step-head">Collect Information <span class="timing-badge">Immediately · Day 1</span></div>
-            <div class="step-body">
-              <div class="todo-note">TODO — Route Caller Type into Breakdown Tasks<br>Review the information below and complete all fields based on the Caller Type and Call Resolution selected.</div>
-              <div class="sub-title" style="margin-bottom: .5rem;">Select caller type to see field codes</div>
-              <div class="caller-tabs">${tabs}</div>
-              <div class="sub-section">
-                <div class="sub-title">Collecting Information — ${ct.label}</div>
-                <div class="checks">
-                  <div class="chk"><div class="chk-dot">✓</div><div>Name<br><span class="pill">${ct.fields[0]}</span></div></div>
-                  <div class="chk"><div class="chk-dot">✓</div><div>Phone<br><span class="pill">${ct.fields[1]}</span></div></div>
-                  <div class="chk"><div class="chk-dot">✓</div><div>Email<br><span class="pill">${ct.fields[2]}</span></div></div>
-                  <div class="chk"><div class="chk-dot">✓</div><div>Caller Type<br><span class="pill">{{process.caller_type}}</span></div></div>
-                </div>
-              </div>
-              <hr class="divider">
-              <div class="sub-section">
-                <div class="sub-title">Property Information (If Applicable)</div>
-                <div class="checks">
-                  <div class="chk"><div class="chk-dot">✓</div><div>Property Address<br><span class="pill">{{property.street}}</span></div></div>
-                  <div class="chk"><div class="chk-dot">✓</div><div>Occupancy Status<br><span class="pill">{{unit.occupancy}}</span></div></div>
-                </div>
-              </div>
-              <hr class="divider">
-              <div class="sub-section">
-                <div class="sub-title">Call Details</div>
-                <div class="checks">
-                  <div class="chk"><div class="chk-dot">✓</div><div>Reason for Call<br><span class="pill">{{process.reason_of_the_call}}</span></div></div>
-                  <div class="chk"><div class="chk-dot">✓</div><div>On-Call Notes<br><span class="pill">{{process.on_call_notes}}</span></div></div>
-                </div>
-              </div>
-              <hr class="divider">
-              <div class="sub-section">
-                <div class="sub-title">Call Resolution</div>
-                <div class="resolution-box">
-                  <div class="res-label">Select ONE only &nbsp;<span class="pill">{{process.call_resolution}}</span></div>
-                  <div class="res-option"><div class="res-dot"></div>Transferred Call</div>
-                  <div class="res-option"><div class="res-dot"></div>Resolving Ticket</div>
-                  <div class="res-option"><div class="res-dot"></div>No Action Needed</div>
-                </div>
-              </div>
-              <div class="routing">
-                <div class="r-title">Routing — end of Stage 1</div>
-                <div class="r-row"><span class="r-if">Transferred Call</span><span>→</span><span class="r-then">Transferred Ticket</span></div>
-                <div class="r-row"><span class="r-if">Resolving Ticket</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
-                <div class="r-row"><span class="r-if">No Action Needed</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div>
-              </div>
-            </div>
-          </div>
-        </div>`;
+      card.innerHTML = `<div class="stage-header"><h3>New Inbound Call</h3><span class="owner-tag">Call Handler</span></div><div class="stage-body"><div class="goal"><strong>Goal:</strong> Complete all fields below. All caller types collect the same information — only the field codes differ.</div><div class="step-box"><div class="step-head">Collect Information <span class="timing-badge">Immediately · Day 1</span></div><div class="step-body"><div class="todo-note">TODO — Route Caller Type into Breakdown Tasks<br>Please review the information below and route the process into the appropriate breakdown task based on the Caller Type and Call Resolution selected.</div><div class="sub-title" style="margin-bottom:.5rem;">Select caller type to see field codes</div><div class="caller-tabs">${tabs}</div><div class="sub-section"><div class="sub-title">Collecting Information — ${ct.label}</div><div class="checks"><div class="chk"><div class="chk-dot">✓</div><div>Name<br><span class="pill">${ct.fields[0]}</span></div></div><div class="chk"><div class="chk-dot">✓</div><div>Phone<br><span class="pill">${ct.fields[1]}</span></div></div><div class="chk"><div class="chk-dot">✓</div><div>Email<br><span class="pill">${ct.fields[2]}</span></div></div><div class="chk"><div class="chk-dot">✓</div><div>Caller Type<br><span class="pill">{{process.caller_type}}</span></div></div></div></div><hr class="divider"><div class="sub-section"><div class="sub-title">Property Information (If Applicable)</div><div class="checks"><div class="chk"><div class="chk-dot">✓</div><div>Property Address<br><span class="pill">{{property.street}}</span></div></div><div class="chk"><div class="chk-dot">✓</div><div>Occupancy Status<br><span class="pill">{{unit.occupancy}}</span></div></div></div></div><hr class="divider"><div class="sub-section"><div class="sub-title">Call Details</div><div class="checks"><div class="chk"><div class="chk-dot">✓</div><div>Reason for Call<br><span class="pill">{{process.reason_of_the_call}}</span></div></div><div class="chk"><div class="chk-dot">✓</div><div>On-Call Notes<br><span class="pill">{{process.on_call_notes}}</span></div></div></div></div><hr class="divider"><div class="sub-section"><div class="sub-title">Call Resolution</div><div class="resolution-box"><div class="res-label">Call Resolution &nbsp;<span class="pill">{{process.call_resolution}}</span></div><div style="font-size:12px;color:#6b7280;margin:.4rem 0 .2rem;">Call Resolution must only be one of the following:</div><div class="res-group-label">→ Routes to Transferred Ticket</div><div class="res-option"><div class="res-dot"></div>Transferred Call</div><div class="res-option"><div class="res-dot"></div>Took A Message - Require Action</div><div class="res-option"><div class="res-dot"></div>Routed To Voicemail</div><div class="res-option"><div class="res-dot"></div>Needs Additional Follow Up</div><div class="res-group-label">→ Routes to Support Ticket Resolved</div><div class="res-option"><div class="res-dot green"></div>No Further Action Needed</div><div class="res-option"><div class="res-dot green"></div>Directed To Website</div><div class="res-option"><div class="res-dot green"></div>Educated Caller</div><div class="res-option"><div class="res-dot green"></div>Referred To RR</div></div></div><div class="routing"><div class="r-title">Routing — end of Stage 1</div><div class="r-row"><span class="r-if">Transferred Call / Took A Message / Routed To Voicemail / Needs Additional Follow Up</span><span>→</span><span class="r-then">Transferred Ticket</span></div><div class="r-row"><span class="r-if">No Further Action Needed / Directed To Website / Educated Caller / Referred To RR</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div></div></div></div></div>`;
     }
-  } else {
+  } else if (sid === '2') {
     const st = stage2Tasks[tid];
     const checks = st.fields.map(f => `<div class="chk"><div class="chk-dot">✓</div><div>${f.l}${f.f ? `<br><span class="pill">${f.f}</span>` : ''}</div></div>`).join('');
-    const note = st.note ? `<div class="note-${st.noteType}" style="margin-top: .85rem;">${st.note}</div>` : '';
-    const routing = st.routing ? `<div class="routing" style="margin-top: .85rem;"><div class="r-title">Routing from this step</div><div class="r-row"><span class="r-if">Escalation Required</span><span>→</span><span class="r-then">Escalation Initiated</span></div><div class="r-row"><span class="r-if">Issue Resolved</span><span>→</span><span class="r-then">Support Ticket Resolved</span></div></div>` : '';
-    document.getElementById('stageCard').innerHTML = `
-      <div class="stage-header"><h3>Transferred Ticket</h3><span class="owner-tag">Assigned Team Member</span></div>
-      <div class="stage-body">
-        <div class="goal"><strong>Goal:</strong> Assign the request, document the resolution path, update AppFolio, and follow through until resolved or escalated.</div>
-        <div class="step-box">
-          <div class="step-head">${st.t} <span class="timing-badge">${st.timing}</span></div>
-          <div class="step-body">
-            <div style="font-size: 13px; color: #6b7280; margin-bottom: .85rem;">${st.d}</div>
-            <div class="checks">${checks}</div>
-            ${note}${routing}
-          </div>
-        </div>
-      </div>`;
+    const desc = st.d ? `<div style="font-size:13px;color:#6b7280;margin-bottom:.85rem;">${st.d}</div>` : '';
+    const note = st.note ? `<div class="note-${st.noteType}" style="margin-top:.85rem;">${st.note}</div>` : '';
+    card.innerHTML = `<div class="stage-header"><h3>Transferred Ticket</h3><span class="owner-tag">Assigned Team Member</span></div><div class="stage-body"><div class="goal"><strong>Goal:</strong> Assign the request, document the resolution path, update AppFolio, and follow through until resolved or escalated.</div><div class="step-box"><div class="step-head">${st.t} <span class="timing-badge">${st.timing}</span></div><div class="step-body">${desc}<div class="checks">${checks}</div>${note}${st.routingHtml}</div></div></div>`;
+  } else if (sid === '3') {
+    card.innerHTML = `<div class="stage-header escalation"><h3>Escalation Initiated</h3><span class="owner-tag">Completed Stage</span></div><div class="stage-body"><div class="goal"><strong>Objective:</strong> The inbound call requires formal escalation. Trigger the escalation process and transfer ownership per the Escalation Matrix.</div><div class="step-box"><div class="step-head">Trigger the start process: Escalation</div><div class="step-body"><div class="checks"><div class="chk"><div class="chk-dot">✓</div><div>Trigger the Escalation process in LeadSimple</div></div></div><div class="note-blue" style="margin-top:.85rem;">Refer to the <a href="https://docs.google.com/spreadsheets/d/10_rvR65nmZlfXa_APCyO1JaCuaKGlnQBXjiMLvo1dwc/edit?usp=sharing" target="_blank" style="color:#1e40af;font-weight:600;">Escalation Matrix</a> for severity, ownership, and leadership involvement guidelines.</div></div></div></div>`;
+  } else if (sid === '4') {
+    card.innerHTML = `<div class="stage-header resolved"><h3>Support Ticket Resolved</h3><span class="owner-tag">Completed Stage</span></div><div class="stage-body"><div class="outcome green" style="margin-bottom:.85rem;">✓ Process complete — no further action required</div><div class="note-blue">All documentation and AppFolio notes must be finalized before the process is closed.</div></div>`;
+  } else {
+    card.innerHTML = `<div class="stage-header nuisance"><h3>Nuisance</h3><span class="owner-tag">Canceled Stage</span></div><div class="stage-body"><div class="goal"><strong>Objective:</strong> Handle nuisance or repeated non-actionable calls professionally while maintaining records for reference.</div><div class="step-box"><div class="step-head">Handle Nuisance</div><div class="step-body"><div style="font-size:13px;color:#c71212;margin-bottom:.75rem;">Nuisance calls may include:</div><div class="checks" style="margin-bottom:1rem;"><div class="chk"><div class="chk-dot">✓</div><div>Sales calls</div></div><div class="chk"><div class="chk-dot">✓</div><div>Dropped calls</div></div><div class="chk"><div class="chk-dot">✓</div><div>Wrong numbers</div></div></div><hr class="divider"><div style="font-size:13px;color:#374151;margin-bottom:.75rem;">Please document the details in a LeadSimple process note and note any recurring patterns or behavior in AppFolio if the caller exists in the system.</div><div class="checks"><div class="chk"><div class="chk-dot">✓</div><div>Document in LeadSimple process note<br><span class="pill">{{process.on_call_notes}}</span></div></div><div class="chk"><div class="chk-dot">✓</div><div>Note recurring patterns in AppFolio (if caller exists in system)</div></div></div></div></div></div>`;
   }
 }
-
 updateStage();
 </script>
 </body>
